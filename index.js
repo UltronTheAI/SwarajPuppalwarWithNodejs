@@ -50,13 +50,13 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
     } catch (err) { res.send(404) }
 }); app.get('/post', async (req, res) => {
     try {
-        // decodeURIComponent(req.url.replace('/post?', '').replaceAll(' ', ''))
+        // decodeURIComponent(req.url.replace('/post?', '').replace(' ', ''))
         Blogs.find().limit(1)
             .then((result) => {
                 result = result[0]
                 console.log(result)
                 fs.readFile(__dirname + '/public/posts/code.sample', { encoding: 'utf8' }, async (err, data) => {
-                    await res.send(data.replaceAll('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))
+                    await res.send(data.replace('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))
                 });
             })
             .catch((err) => { res.send(404) })
@@ -69,23 +69,23 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
             await comment.save()
                 .then((result) => {
                     fs.readFile(__dirname + '/public/contact/code.sample', { encoding: 'utf8' }, async (err, out) => {
-                        await res.send(out.replaceAll('@$title', 'Comment added !').replace('@$text', '" epicdeveloper14@gmail.com ", will send to email, within 2 days, on your email: " ' + data.email + ' " !'))
+                        await res.send(out.replace('@$title', 'Comment added !').replace('@$text', '" epicdeveloper14@gmail.com ", will send to email, within 2 days, on your email: " ' + data.email + ' " !'))
                     });
                 })
                 .catch((err) => {
                     fs.readFile(__dirname + '/public/contact/code.sample', { encoding: 'utf8' }, async (err, data) => {
-                        await res.send(data.replaceAll('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
+                        await res.send(data.replace('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
                     });
                 })
             fs.readFile(__dirname + '/public/contact/code.sample', { encoding: 'utf8' }, async (err, out) => {
-                await res.send(out.replaceAll('@$title', 'Comment added !').replace('@$text', '" epicdeveloper14@gmail.com ", will send to email, within 2 days, on your email: " ' + data.email + ' " !'))
+                await res.send(out.replace('@$title', 'Comment added !').replace('@$text', '" epicdeveloper14@gmail.com ", will send to email, within 2 days, on your email: " ' + data.email + ' " !'))
             });
         } else {
             fs.readFile(__dirname + '/public/contact/code.sample', { encoding: 'utf8' }, async (err, data) => {
-                await res.send(data.replaceAll('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
+                await res.send(data.replace('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
             });
         }
     } catch (err) { fs.readFile(__dirname + '/public/contact/code.sample', { encoding: 'utf8' }, async (err, data) => {
-        await res.send(data.replaceAll('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
+        await res.send(data.replace('@$title', 'Failed to send comment !').replace('@$text', 'Failed to post comment, invalid email or text or name !'))
     }); }
 }); connect()

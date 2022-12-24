@@ -54,7 +54,7 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
             .then((result) => {
                 console.log(result)
                 fs.readFile(__dirname + '/public/posts/code.sample', { encoding: 'utf8' }, async (err, data) => {
-                    await res.send(data.replace('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))
+                    await res.send(data.replace('$@title', result.title).replace('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))
                 });
             })
             .catch((err) => { res.send(404) })

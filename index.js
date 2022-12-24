@@ -49,6 +49,7 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
             .catch((err) => { res.send(404) })
     } catch (err) { res.send(404) }
 }); app.get('/post', async (req, res) => {
+    console.log(unescape(req.url.replace('/post?', '')))
     try {
         Blogs.findById(unescape(req.url.replace('/post?', '')))
             .then((result) => {

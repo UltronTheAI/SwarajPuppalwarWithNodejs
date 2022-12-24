@@ -50,10 +50,8 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
     } catch (err) { res.send(404) }
 }); app.get('/post', async (req, res) => {
     try {
-        // decodeURIComponent(req.url.replace('/post?', '').replace(' ', ''))
-        Blogs.find().limit(1)
+        Blogs.findById(decodeURIComponent(req.url.replace('/post?', '').replace(' ', '')))
             .then((result) => {
-                result = result[0]
                 console.log(result)
                 fs.readFile(__dirname + '/public/posts/code.sample', { encoding: 'utf8' }, async (err, data) => {
                     await res.send(data.replace('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))

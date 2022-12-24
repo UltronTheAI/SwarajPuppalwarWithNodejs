@@ -20,7 +20,7 @@ async function connect() {
 app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) => {
     // Code :-
     try {
-        var data = JSON.parse(unescape(req.url.replace('/api.blogs.add?', '')))
+        var data = JSON.parse(decodeURIComponent(req.url.replace('/api.blogs.add?', '')))
         if (data.password == process.env.PASSWORD) {
             const blog = new Blogs(data)
             await blog.save()
@@ -49,9 +49,8 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
             .catch((err) => { res.send(404) })
     } catch (err) { res.send(404) }
 }); app.get('/post', async (req, res) => {
-    console.log(req.url.replace('/post?', ''))
     try {
-        Blogs.findById(req.url.replace('/post?', ''))
+        Blogs.findById(decodeURIComponent(req.url.replace('/post?', '')))
             .then((result) => {
                 fs.readFile(__dirname + '/public/posts/code.sample', { encoding: 'utf8' }, async (err, data) => {
                     await res.send(data.replaceAll('$@title', result.title).replace('$@date', result.date).replace('$@image', result.image).replace('$@body', result.body))
@@ -62,7 +61,7 @@ app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) =>
     } catch (err) { res.send(404) }
 }); app.get('/comment', async (req, res) => {
     try {
-        var data = await JSON.parse(unescape(req.url.replace('/comment?', '')))
+        var data = await JSON.parse(decodeURIComponent(req.url.replace('/comment?', '')))
         if (data.name != '' && data.email != '' && data.text != '') {
             const comment = new Commments(data)
             await comment.save()

@@ -17,7 +17,12 @@ async function connect() {
     }
 }
 
-app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) => {
+app.use(function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  return next();
+}); app.use(express.static('public')); app.get('/api.blogs.add', async (req, res) => {
     // Code :-
     try {
         var data = JSON.parse(decodeURIComponent(req.url.replace('/api.blogs.add?', '')))

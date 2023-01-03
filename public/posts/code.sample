@@ -32,7 +32,7 @@
         <ul class="flex gap-x-3 font-medium text-gray-200">
           <li class="hover:text-white"><a href="/posts">Blogs</a></li>
           <li class="hover:text-white"><a href="https://github.com/UltronTheAI">GitHub</a></li>
-          <li class="hover:text-white"><a href="/">Contact</a></li>
+          <li class="hover:text-white"><a href="/contact">Contact</a></li>
         </ul>
       </nav>
     </div>

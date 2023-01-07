@@ -6,7 +6,8 @@
   "scripts": {
     "build": "",
     "start": "node .",
-    "nodemon": "nodemon ."
+    "nodemon": "nodemon .",
+    "dev": "echo okay!"
   },
   "keywords": [],
   "author": "",

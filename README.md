@@ -3,4 +3,4 @@
     
 # Web
     https://swarajpuppalwar.tech/
-<iframe src="https://openai.com/"></iframe>
+<iframe src=" https://openai.com/ " ></iframe>

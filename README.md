@@ -10,4 +10,3 @@
 
 ```sh
 $ xdg-open "https://swarajpuppalwar.onrender.com"
-```
